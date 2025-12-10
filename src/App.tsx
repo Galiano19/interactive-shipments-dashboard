@@ -14,20 +14,28 @@ function App() {
   return (
     <>
       <h1> Interactive Shipment List</h1>
-      <div className="card">
-        <button onClick={() => handleClick()}>get shipment list</button>
-      </div>
+      <button onClick={() => handleClick()}>get shipment list</button>
       {shipmentList.length > 0 && (
         <div>
           <h2>Shipment List:</h2>
-          <ul>
+          <table>
+            <tr>
+              <th>ID</th>
+              <th>Origin</th>
+              <th>Destination</th>
+              <th>Status</th>
+              <th>Estimated Arrival</th>
+            </tr>
             {shipmentList.map((shipment) => (
-              <li key={shipment.id}>
-                {shipment.id} - {shipment.origin} to {shipment.destination} (
-                {shipment.status})
-              </li>
+              <tr key={shipment.id}>
+                <td>{shipment.id}</td>
+                <td>{shipment.origin}</td>
+                <td>{shipment.destination}</td>
+                <td>{shipment.status}</td>
+                <td>{shipment.estimatedArrival}</td>
+              </tr>
             ))}
-          </ul>
+          </table>
         </div>
       )}
     </>

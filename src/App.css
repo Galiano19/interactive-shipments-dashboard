@@ -5,6 +5,14 @@
   text-align: center;
 }
 
-.card {
-  padding: 2em;
+table {
+  border-collapse: collapse;
+}
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+th {
+  background-color: #1a1a1a;
 }
