@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Vite build output
+dist/
+dist-ssr/
+.vite/
+vite.config.ts.timestamp*
