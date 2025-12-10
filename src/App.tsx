@@ -1,35 +1,45 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
+import { getShipments } from "./api/getShipments";
+import type { Shipment } from "./types/Shipments";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [shipmentList, setShipmentList] = useState<Shipment[]>([]);
+
+  const handleClick = async () => {
+    const response = await getShipments();
+    setShipmentList(response);
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1> Interactive Shipment List</h1>
+      <button onClick={() => handleClick()}>get shipment list</button>
+      {shipmentList.length > 0 && (
+        <div>
+          <h2>Shipment List:</h2>
+          <table>
+            <tr>
+              <th>ID</th>
+              <th>Origin</th>
+              <th>Destination</th>
+              <th>Status</th>
+              <th>Estimated Arrival</th>
+            </tr>
+            {shipmentList.map((shipment) => (
+              <tr key={shipment.id}>
+                <td>{shipment.id}</td>
+                <td>{shipment.origin}</td>
+                <td>{shipment.destination}</td>
+                <td>{shipment.status}</td>
+                <td>{shipment.estimatedArrival}</td>
+              </tr>
+            ))}
+          </table>
+        </div>
+      )}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
