@@ -4,6 +4,8 @@ export type ShipmentStatus =
   | "Delivered"
   | "Cancelled";
 
+export type ShipmentsOrder = "asc" | "desc" | undefined;
+
 // Copied from the provided assigment
 export interface Shipment {
   id: string; // e.g., 'SHP-001'

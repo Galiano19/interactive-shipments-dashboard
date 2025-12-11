@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
-import type { Shipment, ShipmentStatus } from "../types/Shipments";
+import type {
+  Shipment,
+  ShipmentsOrder,
+  ShipmentStatus,
+} from "../types/Shipments";
 import FilterDropdown from "./FilterDropdown";
+import { getOrderedList } from "../utils/getOrderedList";
 
 export default function ShipmentTable({
   shipmentListData,
@@ -9,53 +14,17 @@ export default function ShipmentTable({
 }) {
   const [filteredStatus, setFilteredStatus] = useState<ShipmentStatus | "">("");
   const [shipmentsList, setShipmentsList] = useState(shipmentListData);
-  const [sortStatusOrder, setSortStatusOrder] = useState<
-    "asc" | "desc" | undefined
-  >(undefined);
-  const [sortArrivalDateOrder, setSortArrivalDateOrder] = useState<
-    "asc" | "desc" | undefined
-  >(undefined);
+  const [sortStatusOrder, setSortStatusOrder] =
+    useState<ShipmentsOrder>(undefined);
+  const [sortArrivalDateOrder, setSortArrivalDateOrder] =
+    useState<ShipmentsOrder>(undefined);
 
   useEffect(() => {
     setShipmentsList(shipmentListData);
   }, [shipmentListData]);
 
-  function sortList({
-    list,
-    order,
-    item,
-  }: {
-    list: Shipment[];
-    order: "asc" | "desc" | undefined;
-    item: "status" | "date-arrival";
-  }) {
-    let sortedList = list;
-    let currentOrder = order;
-    if (order === undefined || order === "desc") {
-      if (item === "status") {
-        sortedList = [...list].sort((a, b) => a.status.localeCompare(b.status));
-      } else {
-        sortedList = [...list].sort((a, b) =>
-          a.estimatedArrival.localeCompare(b.estimatedArrival)
-        );
-      }
-      currentOrder = "asc";
-    } else {
-      if (item === "status") {
-        sortedList = [...list].sort((a, b) => b.status.localeCompare(a.status));
-      } else {
-        sortedList = [...list].sort((a, b) =>
-          b.estimatedArrival.localeCompare(a.estimatedArrival)
-        );
-      }
-      currentOrder = "desc";
-    }
-
-    return { sortedList, currentOrder };
-  }
-
-  const handleSortByStatus = () => {
-    const orderedList = sortList({
+  const handleOrderByStatus = () => {
+    const orderedList = getOrderedList({
       list: shipmentsList,
       order: sortStatusOrder,
       item: "status",
@@ -67,8 +36,8 @@ export default function ShipmentTable({
     setSortArrivalDateOrder(undefined);
   };
 
-  const handleSortByEstimatedArrival = () => {
-    const orderedList = sortList({
+  const handleOrderByEstimatedArrival = () => {
+    const orderedList = getOrderedList({
       list: shipmentsList,
       order: sortArrivalDateOrder,
       item: "date-arrival",
@@ -94,10 +63,10 @@ export default function ShipmentTable({
             <th>Origin</th>
             <th>Destination</th>
             <th>
-              <button onClick={handleSortByStatus}>Status</button>
+              <button onClick={handleOrderByStatus}>Status</button>
             </th>
             <th>
-              <button onClick={handleSortByEstimatedArrival}>
+              <button onClick={handleOrderByEstimatedArrival}>
                 Estimated Arrival
               </button>
             </th>
