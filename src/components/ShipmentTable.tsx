@@ -10,8 +10,12 @@ import { getOrderedList } from "../utils/getOrderedList";
 export default function ShipmentTable({
   shipmentListData,
 }: {
-  shipmentListData: Shipment[];
+  shipmentListData?: Shipment[];
 }) {
+  if (!shipmentListData || shipmentListData.length === 0) {
+    return null;
+  }
+
   const [filteredStatus, setFilteredStatus] = useState<ShipmentStatus | "">("");
   const [shipmentsList, setShipmentsList] = useState(shipmentListData);
   const [sortStatusOrder, setSortStatusOrder] =
@@ -47,10 +51,6 @@ export default function ShipmentTable({
 
     setSortStatusOrder(undefined);
   };
-
-  if (!shipmentListData || shipmentListData.length === 0) {
-    return null;
-  }
 
   return (
     <>
