@@ -1,22 +1,15 @@
-import { useState } from "react";
 import "./App.css";
-import { getShipments } from "./api/getShipments";
-import type { Shipment } from "./types/Shipments";
 import ShipmentTable from "./components/ShipmentTable";
+import { useShipmentsList } from "./hooks/useShipmentsList";
 
 function App() {
-  const [shipmentList, setShipmentList] = useState<Shipment[]>([]);
-
-  const handleClick = async () => {
-    const response = await getShipments();
-    setShipmentList(response);
-  };
+  const { data, refetch } = useShipmentsList();
 
   return (
     <>
       <h1> Interactive Shipment List</h1>
-      <button onClick={() => handleClick()}>get shipment list</button>
-      <ShipmentTable shipmentListData={shipmentList} />
+      <button onClick={() => refetch()}>get shipment list</button>
+      <ShipmentTable shipmentListData={data} />
     </>
   );
 }
