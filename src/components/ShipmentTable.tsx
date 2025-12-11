@@ -92,7 +92,7 @@ export default function ShipmentTable({
               <tr
                 key={shipment.id}
                 role="button"
-                className="table-row"
+                className="table_row"
                 onClick={() => handleRowClick(shipment)}
               >
                 <td>{shipment.id}</td>
