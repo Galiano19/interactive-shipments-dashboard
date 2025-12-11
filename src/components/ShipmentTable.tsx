@@ -6,6 +6,8 @@ import type {
 } from "../types/Shipments";
 import FilterDropdown from "./FilterDropdown";
 import { getOrderedList } from "../utils/getOrderedList";
+import "./ShipmentTable.css";
+import DetailedShipment from "./DetailedShipment";
 
 export default function ShipmentTable({
   shipmentListData,
@@ -22,6 +24,13 @@ export default function ShipmentTable({
     useState<ShipmentsOrder>(undefined);
   const [sortArrivalDateOrder, setSortArrivalDateOrder] =
     useState<ShipmentsOrder>(undefined);
+  const [selectedShipment, setSelectedShipment] = useState<Shipment | null>(
+    null
+  );
+
+  const handleRowClick = (shipment: Shipment) => {
+    setSelectedShipment(shipment);
+  };
 
   useEffect(() => {
     setShipmentsList(shipmentListData);
@@ -56,6 +65,7 @@ export default function ShipmentTable({
     <>
       <h2>Shipment List:</h2>
       <FilterDropdown setFilteredStatus={setFilteredStatus} />
+
       <table>
         <thead>
           <tr>
@@ -79,7 +89,12 @@ export default function ShipmentTable({
                 filteredStatus === "" || shipment.status === filteredStatus
             )
             .map((shipment) => (
-              <tr key={shipment.id}>
+              <tr
+                key={shipment.id}
+                role="button"
+                className="table_row"
+                onClick={() => handleRowClick(shipment)}
+              >
                 <td>{shipment.id}</td>
                 <td>{shipment.origin}</td>
                 <td>{shipment.destination}</td>
@@ -89,6 +104,12 @@ export default function ShipmentTable({
             ))}
         </tbody>
       </table>
+      {selectedShipment && (
+        <DetailedShipment
+          shipment={selectedShipment}
+          onClose={() => setSelectedShipment(null)}
+        />
+      )}
     </>
   );
 }

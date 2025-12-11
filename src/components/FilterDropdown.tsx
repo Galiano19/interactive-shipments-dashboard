@@ -1,11 +1,5 @@
+import { shipmentStatus } from "../constants/shipmentStatus";
 import type { ShipmentStatus } from "../types/Shipments";
-
-const shipmentStatuses: ShipmentStatus[] = [
-  "Booked",
-  "In Transit",
-  "Delivered",
-  "Cancelled",
-];
 
 export default function FilterDropdown({
   setFilteredStatus,
@@ -26,7 +20,7 @@ export default function FilterDropdown({
         onChange={(e) => handleOnChange(e)}
       >
         <option value="">All</option>
-        {shipmentStatuses.map((status) => (
+        {shipmentStatus.map((status) => (
           <option key={status} value={status}>
             {status}
           </option>
