@@ -88,6 +88,7 @@ export default function DetailedShipment({
               name="status"
               onChange={handleStatusChange}
               disabled={updateShipmentMutation.isPending}
+              value={formValues.status}
             >
               {shipmentStatus.map((status) => (
                 <option key={status} value={status}>
