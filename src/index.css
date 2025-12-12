@@ -68,7 +68,7 @@ body {
   padding: var(--spacing-md);
   min-width: 320px;
   overflow: hidden;
-  max-height: 95vh;
+  max-height: 90vh;
 
   @media (min-width: 768px) {
     padding: var(--spacing-lg);
