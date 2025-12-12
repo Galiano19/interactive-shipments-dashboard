@@ -1,73 +1,66 @@
-# React + TypeScript + Vite
+# Interactive Shipments Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React + TypeScript dashboard for managing and tracking shipments with updates and data interaction. (Currently mock data)
 
-Currently, two official plugins are available:
+**Live Demo**: [Click here](https://interactive-shipments-dashboard.vercel.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## React Compiler
+- **Interactive Table**: Sortable table by status and arrival date, status filtering
+- **Data Update**: Edit shipment details and displays mutated data in the table
+- **Responsive Design**: Mobile-first approach
+- **Status Management**: Visual loading and error indicators
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+- **Frontend**: React 18, TypeScript, Vite
+- **State Management**: TanStack Query
+- **Styling**: CSS
+- **Deployment**: Vercel
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## API Management
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+The application uses **TanStack Query** for efficient data management:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- Fetches shipment data from a mock JSON file
+- Implements mutations for updating shipment information
+- Updates are immediately visible in the table through TanStack Query's automatic cache invalidation and refetching after successful mutations
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Repository
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Full source code and development history: [This one](https://github.com/Galiano19/interactive-shipments-dashboard)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Current Limitations & Known Issues
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- **Component Architecture**: Common UI components (buttons, inputs) need extraction into reusable components
+- **Testing**: Mutation tests are incomplete due to challenges with `Math.random()` and timeout handling
+- **Dialog Component**: Custom implementation used instead of a proper UI library with full accessibility support, in a real-life scenario a proper UI library would be used
+
+## Future Improvements
+
+### UI/UX Enhancements
+
+- **Status Visualization**: Colored rows for status indicators (red for cancelled, green for completed, etc...)
+- **Auto-status Update**: Update automatically the status of the shipments based on current date (real world) vs estimated arrival
+- **Edit Indicator**: Hover effects triggers a pen and paper icon for editable table rows
+- **Success Notification**: Floating confirmation messages when shipments are updated
+- **Search Functionality**: Global search across data
+- **Brand Identity**: Develop consistent design system (currently reusing colors from previous personal project of mine)
+
+### Technical Improvements
+
+- **Component Library**: Extract shared UI components (buttons, selectors, inputs) into reusable library, and use an external UI library for prmitive components
+- **Testing & CI/CD**: Implement comprehensive test suite with automated testing pipeline with GitHub Actions
+
+## Getting Started
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
 ```
