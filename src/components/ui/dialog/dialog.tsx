@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Dialog.css";
+import "./dialog.css";
 
 type DialogProps = {
   title: string;
