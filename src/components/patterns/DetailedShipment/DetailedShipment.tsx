@@ -1,9 +1,8 @@
-import type { Shipment, ShipmentStatus } from "../types/Shipments";
-import Dialog from "./ui/dialog/dialog";
-import "./DetailedShipment.css";
 import { useState } from "react";
-import { shipmentStatus } from "../constants/shipmentStatus";
-import { useUpdateShipment } from "../hooks/useUpdateShipment";
+import { useUpdateShipment } from "../../../hooks/useUpdateShipment";
+import type { Shipment, ShipmentStatus } from "../../../types/Shipments";
+import Dialog from "../../ui/dialog/dialog";
+import { shipmentStatus } from "../../../constants/shipmentStatus";
 
 interface DetailedShipmentProps {
   shipment: Shipment;

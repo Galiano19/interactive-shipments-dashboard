@@ -1,5 +1,6 @@
-import { shipmentStatus } from "../constants/shipmentStatus";
-import type { ShipmentStatus } from "../types/Shipments";
+import { shipmentStatus } from "../../../constants/shipmentStatus";
+import type { ShipmentStatus } from "../../../types/Shipments";
+import "./FilterDropdown.css";
 
 export default function FilterDropdown({
   setFilteredStatus,
@@ -12,7 +13,7 @@ export default function FilterDropdown({
   };
 
   return (
-    <div>
+    <div className="status-sort-selector">
       <label htmlFor="status-filter">Filter by Status:</label>
       <select
         id="status-filter"
