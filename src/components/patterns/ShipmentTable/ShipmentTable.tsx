@@ -8,6 +8,7 @@ import { getOrderedList } from "../../../utils/getOrderedList";
 import FilterDropdown from "../FilterDropdown/FilterDropdown";
 import DetailedShipment from "../DetailedShipment/DetailedShipment";
 import "./ShipmentTable.css";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 export default function ShipmentTable({
   shipmentListData,
@@ -75,11 +76,23 @@ export default function ShipmentTable({
                 <th>Origin</th>
                 <th>Destination</th>
                 <th>
-                  <button onClick={handleOrderByStatus}>Status</button>
+                  <button onClick={handleOrderByStatus}>
+                    Status{" "}
+                    {sortStatusOrder === "asc" ? (
+                      <ChevronUp />
+                    ) : (
+                      <ChevronDown />
+                    )}
+                  </button>
                 </th>
                 <th>
                   <button onClick={handleOrderByEstimatedArrival}>
-                    Estimated Arrival
+                    Estimated Arrival{" "}
+                    {sortArrivalDateOrder === "asc" ? (
+                      <ChevronUp />
+                    ) : (
+                      <ChevronDown />
+                    )}
                   </button>
                 </th>
               </tr>

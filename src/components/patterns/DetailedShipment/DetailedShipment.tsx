@@ -3,6 +3,7 @@ import { useUpdateShipment } from "../../../hooks/useUpdateShipment";
 import type { Shipment, ShipmentStatus } from "../../../types/Shipments";
 import Dialog from "../../ui/dialog/dialog";
 import { shipmentStatus } from "../../../constants/shipmentStatus";
+import "./DetailedShipment.css";
 
 interface DetailedShipmentProps {
   shipment: Shipment;
@@ -54,12 +55,16 @@ export default function DetailedShipment({
     <Dialog title={shipment.id} defaultOpen onClose={onClose}>
       <Dialog.Body>
         {updateShipmentMutation.isError && (
-          <div className="error_message">
+          <div className="error-message">
             Something went wrong, please try again
           </div>
         )}
-        <form className="edit_form">
-          <div className="edit_form_row">
+        <form
+          className={`edit-form ${
+            updateShipmentMutation.isPending ? "isLoading" : ""
+          }`}
+        >
+          <div className="edit-form-row">
             <label htmlFor="origin">Origin:</label>
             <input
               type="text"
@@ -69,7 +74,7 @@ export default function DetailedShipment({
               disabled
             />
           </div>
-          <div className="edit_form_row">
+          <div className="edit-form-row">
             <label htmlFor="destination">Destination:</label>
             <input
               type="text"
@@ -80,7 +85,7 @@ export default function DetailedShipment({
               disabled={updateShipmentMutation.isPending}
             />
           </div>
-          <div className="edit_form_row">
+          <div className="edit-form-row">
             <label htmlFor="status">Status:</label>
             <select
               id="status"
@@ -96,7 +101,7 @@ export default function DetailedShipment({
               ))}
             </select>
           </div>
-          <div className="edit_form_row">
+          <div className="edit-form-row">
             <label htmlFor="estimatedArrival">Estimated Arrival:</label>
             <input
               type="text"
@@ -109,12 +114,17 @@ export default function DetailedShipment({
         </form>
       </Dialog.Body>
       <Dialog.Footer>
-        <button onClick={onClose} disabled={updateShipmentMutation.isPending}>
+        <button
+          className="button"
+          onClick={onClose}
+          disabled={updateShipmentMutation.isPending}
+        >
           Close
         </button>
         <button
           onClick={handleSave}
           disabled={updateShipmentMutation.isPending}
+          className="button"
         >
           Save
         </button>

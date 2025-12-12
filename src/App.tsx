@@ -30,6 +30,14 @@ function App() {
         </div>
       )}
       <ShipmentTable shipmentListData={data} />
+      <div className="footer">
+        <a
+          href="https://github.com/Galiano19/interactive-shipments-dashboard"
+          target="_blank"
+        >
+          Check the repository by yourself
+        </a>
+      </div>
     </div>
   );
 }
