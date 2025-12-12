@@ -23,7 +23,9 @@ function App() {
             <p> - Carlos Galiano</p>
           </div>
           <div className="introduction-button-container">
-            <button onClick={() => refetch()}>get shipment list</button>
+            <button className="button" onClick={() => refetch()}>
+              get shipment list
+            </button>
           </div>
         </div>
       )}
